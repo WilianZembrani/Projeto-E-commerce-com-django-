@@ -13,7 +13,7 @@
 
                 {% if produto.imagem %}
                 <a href='{{produto.slug}}'>
-                    <img class="card-img-top" src="/media/{{ object.image.url }}"
+                    <img class="card-img-top" src="{{produto.imagem.url}}"
                 alt="{{produto.nome}}">
                 </a>
                 {% endif %}
@@ -60,6 +60,6 @@
         {% include "partial/_pagination.html" %}
     </div>
 </div>
-{% endblock conteudo %}
+{% endblock%}
 
 
