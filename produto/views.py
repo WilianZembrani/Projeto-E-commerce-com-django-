@@ -54,7 +54,7 @@ class AdicionarAoCarrinho(View):
         if variacao.estoque < 1:
             messages.error(
                 self.request,
-                'Estoque insuficiente'
+                'Estoque insuficiente '
             )
             return redirect(http_referer)
         
@@ -71,8 +71,8 @@ class AdicionarAoCarrinho(View):
             if variacao_estoque <  quantidade_carrinho:
                 messages.warning(
                     self.request,
-                    f'Estoque insuficiente para {quantidade_carrinho}x'
-                    f'no produto "{produto_nome}". Adicionamos {variacao_estoque}x'
+                    f'Estoque insuficiente para {quantidade_carrinho}x '
+                    f'no produto "{produto_nome}". Adicionamos {variacao_estoque}x '
                     f'no seu carrinho'
             )
                 quantidade_carrinho = variacao_estoque

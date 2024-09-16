@@ -122,20 +122,20 @@ class Criar(BasePerfil):
             if autentica:
                 login(self.request, user=usuario)
 
-        # self.request.session['carrinho'] = self.carrinho
-        # self.request.session.save()
+        self.request.session['carrinho'] = self.carrinho
+        self.request.session.save()
 
-        # messages.success(
-        #     self.request,
-        #     'Seu cadastro foi criado ou atualizado com sucesso.'
-        # )
+        messages.success(
+            self.request,
+            'Seu cadastro foi criado ou atualizado com sucesso.'
+        )
 
-        # messages.success(
-        #     self.request,
-        #     'Você fez login e pode concluir sua compra.'
-        # )
+        messages.success(
+            self.request,
+            'Você fez login e pode concluir sua compra.'
+        )
 
-        # return redirect('produto:carrinho')
+        return redirect('produto:carrinho')
         return self.renderizar
 
 
