@@ -80,7 +80,7 @@ class Criar(BasePerfil):
         # Usuário logado
         if self.request.user.is_authenticated:
             usuario = get_object_or_404(
-                User, username=self.request.user.username)
+                User, username=self.request.user.username) #type:ignore
 
             usuario.username = username
 

@@ -12,7 +12,7 @@ class Perfil(models.Model):
     cpf = models.CharField(max_length=11, help_text='Apenas os números')
     endereco = models.CharField(max_length=50, verbose_name='Endereço')
     numero = models.CharField(max_length=5, verbose_name='Número')
-    completemento = models.CharField(max_length=30)
+    complemento = models.CharField(max_length=30)
     bairro = models.CharField(max_length=30)
     cep = models.CharField(max_length=8)
     cidade = models.CharField(max_length=30)
