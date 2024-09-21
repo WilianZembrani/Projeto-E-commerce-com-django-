@@ -12,24 +12,24 @@ from utils import utils
 from .models import Pedido, ItemPedido
 
 
-class DispatchLoginRequired(View):
+class DispatchLoginRequiredMixin(View):
     def dispatch(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
             return redirect('perfil:criar')
         
         return super().dispatch( *args, **kwargs)
+    
+    def get_queryset(self, *args, **kwargs): 
+        qs = super().get_queryset(*args, **kwargs) #type:ignore
+        qs = qs.filter(usuario=self.request.user)
+        return qs
 
-class Pagar(DispatchLoginRequired,DetailView):
+
+class Pagar(DispatchLoginRequiredMixin,DetailView):
     template_name = 'pedido/pagar.html'
     model = Pedido
     pk_url_kwarg = 'pk'
     context_object_name = 'pedido'
-
-    def get_queryset(self, *args, **kwargs): 
-        qs = super().get_queryset(*args, **kwargs)
-        qs = qs.filter(usuario=self.request.user)
-        return qs
-
 
 
 class SalvarPedido(View):
@@ -123,9 +123,16 @@ class SalvarPedido(View):
             )
         )
 
-class Detalhe(View):
-    pass
+class Detalhe(DispatchLoginRequiredMixin, DetailView):
+    model = Pedido
+    context_object_name = 'pedidos'
+    template_name = 'pedido/detalhe.html'
+    pk_url_kwarg = 'pk'
 
-class Lista(View):
-    def get(self,*args, **kwargs):
-        return HttpResponse('Lista')
+
+class Lista(DispatchLoginRequiredMixin, ListView):
+    model = Pedido
+    context_object_name = 'pedidos'
+    template_name = 'pedido/lista.html'
+    paginate_by = 5
+    ordering = ['-pk']
